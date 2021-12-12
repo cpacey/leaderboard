@@ -1,0 +1,20 @@
+name: .NET
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: main
+
+jobs:
+  dotnet:
+    name: Compile
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout
+      - uses: actions/setup-dotnet
+
+      - name: Compile
+        run: dotnet build --nologo -c Release
+
+      - name: NUnit
+        run: dotnet test --nologo --no-build -c Release --filter TestCategory=Unit
