@@ -8,13 +8,14 @@ on:
 jobs:
   dotnet:
     name: Compile
+    runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-dotnet@v2
+      - uses: actions/setup-dotnet@v1
 
       - name: Compile
         run: dotnet build --nologo -c Release
 
       - name: NUnit
-        run: dotnet test --nologo --no-build -c Release --filter TestCategory=Unit
+        run: dotnet test --nologo --no-build -c Release
