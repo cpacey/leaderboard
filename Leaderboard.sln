@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "LocalDocker", "LocalDocker\LocalDocker.dcproj", "{39FF77FC-BC74-40E0-AABA-A3698F4CF1F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leaderboard.WebAPI", "LeaderboardAPI\Leaderboard.WebAPI.csproj", "{E1DCCC4D-7EB8-43DE-8E5A-E8E2783892B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Leaderboard.WebAPI", "Leaderboard.WebAPI\Leaderboard.WebAPI.csproj", "{E1DCCC4D-7EB8-43DE-8E5A-E8E2783892B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17501CB2-4B65-4504-ABBF-F163EDE0AB70}"
 	ProjectSection(SolutionItems) = preProject
