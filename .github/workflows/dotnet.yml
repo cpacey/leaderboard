@@ -8,6 +8,7 @@ on:
 jobs:
   dotnet:
     name: Compile
+    runs-on: linux
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v2
