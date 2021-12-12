@@ -1,0 +1,20 @@
+version: '3.4'
+
+x-environment: &app-environment
+  DOTNET_ENVIRONMENT: Development
+  D2L__DynamoDbLocalAddress: http://dynamodb:8000
+  D2L__ValidRegions__0: local
+  D2L__AwsResourcePrefix: local-auth
+  D2L__KeyTimeUntilUseSeconds: 3600
+  D2L__KeyRotationPeriodSeconds: 3600
+  D2L__KeyLifetimeSeconds: 10800
+  HOME: /home/root
+
+services:
+  api:
+    depends_on: [dynamodb]
+    build:
+      context: ../LeaderboardAPI
+      dockerfile: Dockerfile
+  dynamodb:
+    image: amazon/dynamodb-local:latest
