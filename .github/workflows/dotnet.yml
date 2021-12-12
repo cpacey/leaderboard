@@ -10,8 +10,8 @@ jobs:
     name: Compile
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout
-      - uses: actions/setup-dotnet
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v2
 
       - name: Compile
         run: dotnet build --nologo -c Release
