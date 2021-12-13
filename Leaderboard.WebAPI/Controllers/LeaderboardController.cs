@@ -6,15 +6,21 @@ namespace LeaderboardAPI.Controllers {
 	[Route( "[controller]" )]
 	public class LeaderboardController : ControllerBase {
 		private readonly ILogger<LeaderboardController> m_logger;
+		private readonly ILeaderboardManager m_leaderboardManager;
 
-		public LeaderboardController( ILogger<LeaderboardController> logger ) {
+		public LeaderboardController(
+			ILogger<LeaderboardController> logger,
+			ILeaderboardManager leaderboardManager
+		) {
 			m_logger = logger;
+			m_leaderboardManager = leaderboardManager;
 		}
 
 		[HttpGet( Name = "GetLeaders" )]
-		public IEnumerable<LeaderboardEntry> Get() {
-
-			return Enumerable.Empty<LeaderboardEntry>();
+		public IEnumerable<LeaderboardEntry> Get(
+			[FromQuery] int count = 10
+		) {
+			return m_leaderboardManager.GetLeaders( count );
 		}
 	}
 }
