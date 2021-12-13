@@ -8,6 +8,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<Leaderboard.ILeaderboardManager, Leaderboard.LeaderboardManager>();
+builder.Services.AddScoped<Leaderboard.IConfiguration, Leaderboard.Configuration>();
+builder.Services.AddScoped<Amazon.DynamoDBv2.IAmazonDynamoDB>( serviceProvider => new Amazon.DynamoDBv2.AmazonDynamoDBClient() );
 
 var app = builder.Build();
 

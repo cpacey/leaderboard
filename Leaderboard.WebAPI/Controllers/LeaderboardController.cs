@@ -17,17 +17,17 @@ namespace LeaderboardAPI.Controllers {
 		}
 
 		[HttpGet( Name = "GetLeaders" )]
-		public IEnumerable<LeaderboardEntry> Get(
+		public async Task<IEnumerable<LeaderboardEntry>> GetAsync(
 			[FromQuery] int count = 10
 		) {
-			return m_leaderboardManager.GetLeaders( count );
+			return await m_leaderboardManager.GetLeadersAsync( count );
 		}
 
 		[HttpPost( Name = "PostEntry" )]
-		public void Post(
+		public async Task PostAsync(
 			[FromBody] LeaderboardEntry entry
 		) {
-			m_leaderboardManager.AddToLeaderboard( entry.UserName, entry.Score );
+			await m_leaderboardManager.AddToLeaderboardAsync( entry.UserName, entry.Score );
 		}
 	}
 }

@@ -1,8 +1,8 @@
 ﻿namespace Leaderboard {
 	public interface ILeaderboardManager {
 
-		void AddToLeaderboard( string username, int score );
-		IEnumerable<LeaderboardEntry> GetLeaders( int count );
+		Task AddToLeaderboardAsync( string username, int score, CancellationToken cancellation = default );
+		Task<IEnumerable<LeaderboardEntry>> GetLeadersAsync( int count, CancellationToken cancellation = default );
 
 	}
 }
