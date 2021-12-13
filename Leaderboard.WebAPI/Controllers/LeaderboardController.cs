@@ -22,5 +22,12 @@ namespace LeaderboardAPI.Controllers {
 		) {
 			return m_leaderboardManager.GetLeaders( count );
 		}
+
+		[HttpPost( Name = "PostEntry" )]
+		public void Post(
+			[FromBody] LeaderboardEntry entry
+		) {
+			m_leaderboardManager.AddToLeaderboard( entry.UserName, entry.Score );
+		}
 	}
 }
