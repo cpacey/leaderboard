@@ -5,6 +5,7 @@ namespace Leaderboard {
 	public sealed class LeaderboardManager : ILeaderboardManager {
 
 		public static class DynamoAttributeNames {
+			public const string DateTime = "datetime";
 			public const string UserName = "username";
 			public const string Score = "score";
 			public const string ExpiryTime = "ttl";
@@ -31,16 +32,16 @@ namespace Leaderboard {
 			}
 
 			Dictionary<string, AttributeValue> attributes = new() {
+				{ DynamoAttributeNames.DateTime, GetCurrentTimeAttributeValue() },
 				{ DynamoAttributeNames.UserName, new AttributeValue( username ) },
 				{ DynamoAttributeNames.Score, new AttributeValue() { N = score.ToString() } },
 				{ DynamoAttributeNames.ExpiryTime, GetTtlAttributeValue( TimeSpan.FromDays( 30 ) ) }
 			};
 
-			PutItemRequest putItemRequest = new PutItemRequest(
+			PutItemRequest putItemRequest = new(
 				tableName: m_configuration.LeaderboardTableName,
 				item: attributes
-			) {
-			};
+			);
 
 			await m_client.PutItemAsync(
 				putItemRequest,
@@ -63,7 +64,6 @@ namespace Leaderboard {
 
 			QueryRequest queryRequest = new() {
 				TableName = m_configuration.LeaderboardTableName,
-				IndexName = "ByScore",
 				ScanIndexForward = true
 			};
 
@@ -92,6 +92,13 @@ namespace Leaderboard {
 		private static AttributeValue GetTtlAttributeValue( TimeSpan timeSpan ) {
 
 			long epochSeconds = DateTimeOffset.Now.Add( timeSpan ).ToUnixTimeSeconds();
+
+			return new AttributeValue { N = epochSeconds.ToString() };
+		}
+
+		private static AttributeValue GetCurrentTimeAttributeValue() {
+
+			long epochSeconds = DateTimeOffset.Now.ToUnixTimeSeconds();
 
 			return new AttributeValue { N = epochSeconds.ToString() };
 		}

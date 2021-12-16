@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
@@ -11,13 +11,18 @@
   "profiles": {
     "LeaderboardAPI": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7226;http://localhost:5226",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DYNAMO_ENDPOINT": "http://localhost:8000",
+        "DYNAMO_TABLE": "leaderboard",
+        "AWS_SECRET_ACCESS_KEY": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+        "AWS_DEFAULT_REGION": "us-east-1",
+        "AWS_ACCESS_KEY_ID": "AKIAIOSFODNN7EXAMPLE"
+      },
+      "applicationUrl": "https://localhost:7226;http://localhost:5226",
+      "dotnetRunMessages": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
