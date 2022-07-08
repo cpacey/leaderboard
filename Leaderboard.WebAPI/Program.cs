@@ -9,7 +9,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<Leaderboard.ILeaderboardManager, Leaderboard.LeaderboardManager>();
 builder.Services.AddScoped<Leaderboard.IConfiguration, Leaderboard.Configuration>();
-builder.Services.AddScoped<Amazon.DynamoDBv2.IAmazonDynamoDB>( serviceProvider => new Amazon.DynamoDBv2.AmazonDynamoDBClient() );
+builder.Services.AddScoped<Amazon.DynamoDBv2.IAmazonDynamoDB>( serviceProvider => {
+	Leaderboard.IConfiguration config = serviceProvider.GetRequiredService<Leaderboard.IConfiguration>();
+	Amazon.DynamoDBv2.AmazonDynamoDBConfig clientConfig = new() {
+		ServiceURL = config.DynamoEndpoint
+	};
+	return new Amazon.DynamoDBv2.AmazonDynamoDBClient( clientConfig );
+} );
 
 var app = builder.Build();
 
